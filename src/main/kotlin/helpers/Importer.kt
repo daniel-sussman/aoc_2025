@@ -24,12 +24,22 @@ class Importer {
             return result
         }
 
-        fun extractRows(filepath: String): List<List<Int>> {
+        fun extractCsv(filepath: String): List<String> {
+            var result = listOf<String>()
+            val csvFile = ClassLoader.getSystemResourceAsStream(filepath)
+                ?: throw IllegalArgumentException("Cannot find $filepath")
+            csvFile.bufferedReader().readLines().forEach { row ->
+                result += row.split(",")
+            }
+            return result
+        }
+
+        fun extractRows(filepath: String): List<List<String>> {
             val csvFile = ClassLoader.getSystemResourceAsStream(filepath) ?: throw IllegalArgumentException("Cannot find $filepath")
             return csvFile.bufferedReader().useLines { lines ->
                 lines.mapIndexed { index, row ->
                     row.split(",").mapIndexed { columnIndex, value ->
-                        value.trim().toInt()
+                        value.trim()
                     }
                 }.toList()
             }

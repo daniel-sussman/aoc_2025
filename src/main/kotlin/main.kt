@@ -1,3 +1,4 @@
+import solutions.DayFour
 import solutions.DayOne
 import solutions.DayThree
 import solutions.DayTwo
@@ -15,4 +16,8 @@ fun main() {
     println("Day Three A: " + fifthResult)
     val sixthResult = DayThree("3a.txt").second()
     println("Day Three B: " + sixthResult)
+    val seventhResult = DayFour("4a.txt").first()
+    println("Day Four A: " + seventhResult)
+    val eigthResult = DayFour("4a.txt").second()
+    println("Day Four B: " + eigthResult)
 }

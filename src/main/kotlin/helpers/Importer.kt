@@ -108,5 +108,15 @@ class Importer {
                 reader.readText()
             }
         }
+
+        fun extractCoords(filepath: String): List<Coord> {
+            val inputStream = ClassLoader.getSystemResourceAsStream(filepath) ?: throw IllegalArgumentException("File not found: $filepath")
+            return inputStream.bufferedReader().useLines { lines ->
+                lines.map { line ->
+                    val (x, y, z) = line.split(",").map(String::toLong)
+                    Coord(x, y, z)
+                }.toList()
+            }
+        }
     }
 }
